@@ -7,16 +7,7 @@
 int main(int argc, char* argv[])
 {
     try {
-        // std::ifstream file;
         std::istream* input = &std::cin;
-        // if (argc > 1) {
-        //     file.open(argv[1]);
-        //     if (!file) {
-        //         std::cerr << "Cannot open input file: " << argv[1] << '\n';
-        //         return 1;
-        //     }
-        //     input = &file;
-        // }
 
         auto ips = ipfilter::read_ips(*input);
         ipfilter::sort_descending(ips);

@@ -60,7 +60,7 @@ void sort_descending(std::vector<IPAddress>& ips)
 {
     std::sort(ips.begin(), ips.end(),
               [](const auto& lhs, const auto& rhs) {
-                  return lhs < rhs;
+                  return lhs > rhs;
               });
 }
 
