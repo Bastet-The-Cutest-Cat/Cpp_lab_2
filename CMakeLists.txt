@@ -1,0 +1,30 @@
+cmake_minimum_required(VERSION 3.10)
+project(ip_filter VERSION 1.0.0 LANGUAGES CXX)
+
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+
+add_library(ip_filter_lib src/ip_filter.cpp)
+target_include_directories(ip_filter_lib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
+
+add_executable(ip_filter src/main.cpp)
+target_link_libraries(ip_filter PRIVATE ip_filter_lib)
+
+enable_testing()
+find_package(Boost REQUIRED)
+add_executable(ip_filter_tests tests/test_ip_filter.cpp)
+target_include_directories(ip_filter_tests PRIVATE ${Boost_INCLUDE_DIRS})
+target_link_libraries(ip_filter_tests PRIVATE ip_filter_lib)
+add_test(NAME ip_filter_unit_tests COMMAND ip_filter_tests)
+
+if(UNIX AND NOT APPLE)
+    install(TARGETS ip_filter RUNTIME DESTINATION bin)
+    set(CPACK_GENERATOR "DEB")
+    set(CPACK_PACKAGE_NAME "ip-filter")
+    set(CPACK_PACKAGE_VENDOR "Student")
+    set(CPACK_PACKAGE_VERSION "${PROJECT_VERSION}")
+    set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "IPv4 filtering laboratory project")
+    set(CPACK_DEBIAN_PACKAGE_MAINTAINER "Student")
+    include(CPack)
+endif()
