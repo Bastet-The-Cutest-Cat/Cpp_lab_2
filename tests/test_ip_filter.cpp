@@ -37,9 +37,9 @@ BOOST_AUTO_TEST_CASE(sort_is_numeric_and_descending)
 
     ipfilter::sort_descending(ips);
 
-    BOOST_CHECK_EQUAL(ipfilter::to_string(ips[0]), "1.1.1.1");
+    BOOST_CHECK_EQUAL(ipfilter::to_string(ips[0]), "1.10.1.1");
     BOOST_CHECK_EQUAL(ipfilter::to_string(ips[1]), "1.2.1.1");
-    BOOST_CHECK_EQUAL(ipfilter::to_string(ips[2]), "1.10.1.1");
+    BOOST_CHECK_EQUAL(ipfilter::to_string(ips[2]), "1.1.1.1");
 }
 
 BOOST_AUTO_TEST_CASE(filters_keep_only_matching_addresses)
